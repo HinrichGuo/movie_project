@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.movie.dao.FilmMapper">
+	<resultMap id="BaseResultMap" type="cn.com.movie.pojo.Film">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="film_name" jdbcType="VARCHAR" property="filmName" />
+		<result column="film_director" jdbcType="VARCHAR" property="filmDirector" />
+		<result column="film_actor" jdbcType="VARCHAR" property="filmActor" />
+		<result column="film_country" jdbcType="VARCHAR" property="filmCountry" />
+		<result column="film_intro" jdbcType="VARCHAR" property="filmIntro" />
+		<result column="film_poster" jdbcType="VARCHAR" property="filmPoster" />
+		<result column="film_premovie" jdbcType="VARCHAR" property="filmPremovie" />
+		<result column="film_playtime" jdbcType="VARCHAR" property="filmPlaytime" />
+		<result column="film_timelong" jdbcType="VARCHAR" property="filmTimelong" />
+		<result column="playtype_id" jdbcType="INTEGER" property="playtypeId" />
+		<result column="film_type" jdbcType="VARCHAR" property="filmType" />
+		<result column="black" jdbcType="VARCHAR" property="black" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, film_name, film_director, film_actor, film_country, film_intro,
+		film_poster,
+		film_premovie, film_playtime, film_timelong, playtype_id, film_type, black
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from film_info
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<!-- lry -->
+	  <!-- 通过放映时间查询 -->
+  <select id="selectByFilmPlaytime" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from film_info 
+    <!-- where film_playtime = #{filmPlaytime,jdbcType=VARCHAR} -->
+  </select>
+	<!-- lry -->
+   <select id="getFilmOneById" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap" >
+   	select
+		<include refid="Base_Column_List" />
+		from film_info
+		where id = #{id,jdbcType=INTEGER}  and  black = '1' 
+   </select>
+	
+<!-- 模糊查询(通过影片名称 filmName) -->
+<select id="PageselectLikeFilms" parameterType="Map" resultMap="BaseResultMap" resultType="Goods">
+        select
+        <include refid="Base_Column_List" />
+        from film_info        
+        where film_name like concat(concat('%',#{filmName,jdbcType=VARCHAR}),'%') and black = '1' 
+        <if test="start!=null and size!=null">
+            limit #{start},#{size}
+        </if>
+    </select>
+
+<!-- 精确查询 -->
+  <select id="PageAccurateSelectFilm"  resultMap="BaseResultMap">
+   select <include refid="Base_Column_List" />
+    from film_info where film_type =#{filmType} And  black = '1' limit #{start},#{size}
+  </select>
+  
+  
+	<select id="selectAllFilm" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from film_info    where black = '1'
+
+	</select>
+	
+	 <select id="PageSelectAll"  resultMap="BaseResultMap">
+  
+  select  <include refid="Base_Column_List" /> from film_info 
+  where black = '1'
+  <if test="start!=null and size!=null">
+            limit #{start},#{size}
+        </if>
+  </select>
+      <!-- 精确查询的数据量计算  -->
+   <select id="selectPreciseTotalPage" resultType="java.lang.Integer"  >
+  select count(*) from film_info  where film_type =#{filmType} 
+  </select>
+ <select id="selectTotalPage" resultType="java.lang.Integer"  >
+  select count(*) from film_info
+  </select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		update film_info
+		set 	black = '0'
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="cn.com.movie.pojo.Film">
+		insert into film_info (id, film_name, film_director,
+		film_actor, film_country, film_intro,
+		film_poster, film_premovie, film_playtime,
+		film_timelong, playtype_id, film_type,
+		black)
+		values (#{id,jdbcType=INTEGER}, #{filmName,jdbcType=VARCHAR},
+		#{filmDirector,jdbcType=VARCHAR},
+		#{filmActor,jdbcType=VARCHAR}, #{filmCountry,jdbcType=VARCHAR}, #{filmIntro,jdbcType=VARCHAR},
+		#{filmPoster,jdbcType=VARCHAR}, #{filmPremovie,jdbcType=VARCHAR},
+		#{filmPlaytime,jdbcType=VARCHAR},
+		#{filmTimelong,jdbcType=VARCHAR}, #{playtypeId,jdbcType=INTEGER}, #{filmType,jdbcType=VARCHAR},
+		'1')     
+	</insert>
+	<insert id="insertSelective" parameterType="cn.com.movie.pojo.Film">
+		insert into film_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="filmName != null">
+				film_name,
+			</if>
+			<if test="filmDirector != null">
+				film_director,
+			</if>
+			<if test="filmActor != null">
+				film_actor,
+			</if>
+			<if test="filmCountry != null">
+				film_country,
+			</if>
+			<if test="filmIntro != null">
+				film_intro,
+			</if>
+			<if test="filmPoster != null">
+				film_poster,
+			</if>
+			<if test="filmPremovie != null">
+				film_premovie,
+			</if>
+			<if test="filmPlaytime != null">
+				film_playtime,
+			</if>
+			<if test="filmTimelong != null">
+				film_timelong,
+			</if>
+			<if test="playtypeId != null">
+				playtype_id,
+			</if>
+			<if test="filmType != null">
+				film_type,
+			</if>
+			<if test="black != null">
+				black,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="filmName != null">
+				#{filmName,jdbcType=VARCHAR},
+			</if>
+			<if test="filmDirector != null">
+				#{filmDirector,jdbcType=VARCHAR},
+			</if>
+			<if test="filmActor != null">
+				#{filmActor,jdbcType=VARCHAR},
+			</if>
+			<if test="filmCountry != null">
+				#{filmCountry,jdbcType=VARCHAR},
+			</if>
+			<if test="filmIntro != null">
+				#{filmIntro,jdbcType=VARCHAR},
+			</if>
+			<if test="filmPoster != null">
+				#{filmPoster,jdbcType=VARCHAR},
+			</if>
+			<if test="filmPremovie != null">
+				#{filmPremovie,jdbcType=VARCHAR},
+			</if>
+			<if test="filmPlaytime != null">
+				#{filmPlaytime,jdbcType=VARCHAR},
+			</if>
+			<if test="filmTimelong != null">
+				#{filmTimelong,jdbcType=VARCHAR},
+			</if>
+			<if test="playtypeId != null">
+				#{playtypeId,jdbcType=INTEGER},
+			</if>
+			<if test="filmType != null">
+				#{filmType,jdbcType=VARCHAR},
+			</if>
+			<if test="black != null">
+				#{black,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="cn.com.movie.pojo.Film">
+		update film_info
+		<set>
+			<if test="filmName != null">
+				film_name = #{filmName,jdbcType=VARCHAR},
+			</if>
+			<if test="filmDirector != null">
+				film_director = #{filmDirector,jdbcType=VARCHAR},
+			</if>
+			<if test="filmActor != null">
+				film_actor = #{filmActor,jdbcType=VARCHAR},
+			</if>
+			<if test="filmCountry != null">
+				film_country = #{filmCountry,jdbcType=VARCHAR},
+			</if>
+			<if test="filmIntro != null">
+				film_intro = #{filmIntro,jdbcType=VARCHAR},
+			</if>
+			<if test="filmPoster != null">
+				film_poster = #{filmPoster,jdbcType=VARCHAR},
+			</if>
+			<if test="filmPremovie != null">
+				film_premovie = #{filmPremovie,jdbcType=VARCHAR},
+			</if>
+			<if test="filmPlaytime != null">
+				film_playtime = #{filmPlaytime,jdbcType=VARCHAR},
+			</if>
+			<if test="filmTimelong != null">
+				film_timelong = #{filmTimelong,jdbcType=VARCHAR},
+			</if>
+			<if test="playtypeId != null">
+				playtype_id = #{playtypeId,jdbcType=INTEGER},
+			</if>
+			<if test="filmType != null">
+				film_type = #{filmType,jdbcType=VARCHAR},
+			</if>
+			<if test="black != null">
+				black = #{black,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="cn.com.movie.pojo.Film">
+		update film_info
+		set film_name = #{filmName,jdbcType=VARCHAR},
+		film_director = #{filmDirector,jdbcType=VARCHAR},
+		film_actor = #{filmActor,jdbcType=VARCHAR},
+		film_country = #{filmCountry,jdbcType=VARCHAR},
+		film_intro = #{filmIntro,jdbcType=VARCHAR},
+		film_poster = #{filmPoster,jdbcType=VARCHAR},
+		film_premovie = #{filmPremovie,jdbcType=VARCHAR},
+		film_playtime = #{filmPlaytime,jdbcType=VARCHAR},
+		film_timelong = #{filmTimelong,jdbcType=VARCHAR},
+		playtype_id = #{playtypeId,jdbcType=INTEGER},
+		film_type = #{filmType,jdbcType=VARCHAR},
+		black = #{black,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+
+
+</mapper>

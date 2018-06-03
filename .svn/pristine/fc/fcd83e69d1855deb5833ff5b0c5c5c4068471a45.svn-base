@@ -1,0 +1,72 @@
+package cn.com.movie.handler;
+
+import java.io.IOException;
+import java.io.InputStream;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+
+import cn.com.movie.pojo.Cinema;
+
+
+
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+
+
+/**
+* @title CinemaHandler.java
+ *<p>
+ *<p>
+ * @author 郭欣
+ * @time 2018年3月29日下午8:46:57
+ */
+@Controller
+public class CinemaHandler {
+	
+	/*@Autowired
+	Cinema cinema;*/
+	SqlSession sqlSession;
+	public  void start() throws IOException {
+		//0.通过输入流 inputStream 获取资源文件CinemaMapper.xml
+				InputStream inputStream = 
+						Resources.getResourceAsStream("mapper/CinemaMapper.xml");
+				
+				//通过 SqlSessionFactory 工厂类加载Mybatis 的配置文件 
+				SqlSessionFactory sqlSessionFactory = 
+						new SqlSessionFactoryBuilder().build(inputStream);
+				
+				//.通过工厂类，打开 sqlSession 对象
+				 sqlSession = sqlSessionFactory.openSession();
+		
+	}
+	@RequestMapping(value="/addCinema",method=RequestMethod.GET) 
+        public String QueryCinema(Cinema cinema) throws IOException {
+		cinema.setId(-1);
+		start();
+		//通过sqlSession 执行sql 语句，得到结果
+		sqlSession.insert("cn.com.movie.dao.CinemaMapper", cinema);
+		System.out.println("测试"+cinema.toString());
+		end();
+        	return "QueryCinema";
+        }
+	@RequestMapping("/add")
+	public String login() {
+		return "AddCinema";
+	}
+	public  void end() {
+		//关闭资源
+		sqlSession.close();
+	}
+	
+        
+}

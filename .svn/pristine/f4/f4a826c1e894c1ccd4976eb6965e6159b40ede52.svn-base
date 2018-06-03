@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+
+	
+	<!-- 加载配置文件 -->
+	<context:property-placeholder location="classpath:jdbc.properties" />
+	
+	<!-- 自动扫描组件 -->
+	<context:component-scan base-package="cn.com.movie">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
+	
+
+	<!-- 配置数据源 ：池操作（C3p0 数据源）-->
+	<bean id="dataSource"
+		class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<!-- 访问数据库的用户名和密码 -->
+		<property name="user" value="root"></property>
+		<property name="password" value="${jdbc.password}"></property>
+		<!-- 驱动 -->
+		<property name="driverClass" value="${jdbc.driverClass}"></property>
+		<!-- URL -->
+		<property name="jdbcUrl" value="${jdbc.jdbcUrl}"></property>
+	</bean>
+	
+	<!-- 事务管理器 -->
+	<bean id="txManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	
+	<!-- 启动声明式事务驱动 -->
+	<tx:annotation-driven transaction-manager="txManager" />
+	
+	<!-- mybatis 整合 -->
+	<bean id="sqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- 数据源 -->
+		<property name="dataSource" ref="dataSource"></property>
+		<!-- 别名 -->
+		<property name="typeAliasesPackage" value="cn.com.movie.po"></property>
+	</bean>
+	
+	<!-- 注册映射文件 -->
+	<bean id="mapperScannerConfigurer"
+		class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!-- 属性配置：① 要被注册的映射文件的基准包（若有对各文件包，可以使用 “,” ";" 空格隔开）；② 防止slqsession 扫描失败的sqlSessionBean 对象 -->	
+		<property name="basePackage" value="cn.com.movie.dao"></property>
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+	</bean>
+
+</beans>

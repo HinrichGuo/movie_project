@@ -1,0 +1,38 @@
+package cn.com.movie.handler;
+
+import org.springframework.stereotype.Controller;
+
+//import org.springframework.stereotype.Controller;
+//import org.springframework.web.bind.annotation.RequestMapping;
+//import org.springframework.web.bind.annotation.RequestMethod;
+//
+////<<<<<<< .mine
+//import cn.com.movie.pojo.Cinema;
+//import cn.com.movie.pojo.Film;
+///*=======*/
+//import cn.com.movie.pojo.Film;
+///*>>>>>>> .r84*/
+//
+//
+//
+@Controller
+public class Text {
+//	
+	
+	/*@RequestMapping("/add")
+	public String getView() {
+		return "textJsp";
+	}
+	
+	@RequestMapping(value="/add",method=RequestMethod.POST)
+<<<<<<< .mine
+	public String getPer(Cinema c) {
+		System.out.println("²âÊÔ £º" + c);
+=======
+	public String getPer(Film f) {
+		System.out.println("²âÊÔ £º" + f);
+>>>>>>> .r84
+		return "";
+	}*/
+
+}

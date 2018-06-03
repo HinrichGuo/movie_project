@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.movie.dao.FilmCommentMapper">
+  <resultMap id="BaseResultMap" type="cn.com.movie.pojo.FilmComment">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="film_id" jdbcType="INTEGER" property="filmId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="comment" jdbcType="VARCHAR" property="comment" />
+    <result column="film_star" jdbcType="VARCHAR" property="filmStar" />
+    <result column="ishide" jdbcType="VARCHAR" property="ishide" />
+    <result column="black" jdbcType="VARCHAR" property="black" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, film_id, user_id, comment, film_star, ishide, black
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from film_comment
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  
+  <select id="selectfilmComment" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from film_comment
+    where film_id = #{film_id,jdbcType=INTEGER}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from film_comment
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.com.movie.pojo.FilmComment">
+    insert into film_comment (id, film_id, user_id, 
+      comment, film_star, ishide, 
+      black)
+    values (#{id,jdbcType=INTEGER}, #{filmId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+      #{comment,jdbcType=VARCHAR}, #{filmStar,jdbcType=VARCHAR}, #{ishide,jdbcType=VARCHAR}, 
+      #{black,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.movie.pojo.FilmComment">
+    insert into film_comment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="filmId != null">
+        film_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="comment != null">
+        comment,
+      </if>
+      <if test="filmStar != null">
+        film_star,
+      </if>
+      <if test="ishide != null">
+        ishide,
+      </if>
+      <if test="black != null">
+        black,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="filmId != null">
+        #{filmId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="comment != null">
+        #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="filmStar != null">
+        #{filmStar,jdbcType=VARCHAR},
+      </if>
+      <if test="ishide != null">
+        #{ishide,jdbcType=VARCHAR},
+      </if>
+      <if test="black != null">
+        #{black,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.movie.pojo.FilmComment">
+    update film_comment
+    <set>
+      <if test="filmId != null">
+        film_id = #{filmId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="comment != null">
+        comment = #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="filmStar != null">
+        film_star = #{filmStar,jdbcType=VARCHAR},
+      </if>
+      <if test="ishide != null">
+        ishide = #{ishide,jdbcType=VARCHAR},
+      </if>
+      <if test="black != null">
+        black = #{black,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.movie.pojo.FilmComment">
+    update film_comment
+    set film_id = #{filmId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      comment = #{comment,jdbcType=VARCHAR},
+      film_star = #{filmStar,jdbcType=VARCHAR},
+      ishide = #{ishide,jdbcType=VARCHAR},
+      black = #{black,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

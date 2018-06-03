@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.movie.dao.TimePlanMapper">
+  <resultMap id="BaseResultMap" type="cn.com.movie.pojo.TimePlan">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="cinema_id" jdbcType="INTEGER" property="cinemaId" />
+    <result column="hall_id" jdbcType="INTEGER" property="hallId" />
+    <result column="film_id" jdbcType="INTEGER" property="filmId" />
+    <result column="start_time" jdbcType="VARCHAR" property="startTime" />
+    <result column="price" jdbcType="VARCHAR" property="price" />
+    <result column="date" jdbcType="VARCHAR" property="date" />
+    <result column="black" jdbcType="VARCHAR" property="black" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, cinema_id, hall_id, film_id, start_time, price, date, black
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from time_plan
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from time_plan
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.com.movie.pojo.TimePlan">
+    insert into time_plan (id, cinema_id, hall_id, 
+      film_id, start_time, price, 
+      date, black)
+    values (#{id,jdbcType=INTEGER}, #{cinemaId,jdbcType=INTEGER}, #{hallId,jdbcType=INTEGER}, 
+      #{filmId,jdbcType=INTEGER}, #{startTime,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR}, 
+      #{date,jdbcType=VARCHAR}, #{black,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.movie.pojo.TimePlan">
+    insert into time_plan
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="cinemaId != null">
+        cinema_id,
+      </if>
+      <if test="hallId != null">
+        hall_id,
+      </if>
+      <if test="filmId != null">
+        film_id,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+      <if test="black != null">
+        black,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="cinemaId != null">
+        #{cinemaId,jdbcType=INTEGER},
+      </if>
+      <if test="hallId != null">
+        #{hallId,jdbcType=INTEGER},
+      </if>
+      <if test="filmId != null">
+        #{filmId,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="black != null">
+        #{black,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.movie.pojo.TimePlan">
+    update time_plan
+    <set>
+      <if test="cinemaId != null">
+        cinema_id = #{cinemaId,jdbcType=INTEGER},
+      </if>
+      <if test="hallId != null">
+        hall_id = #{hallId,jdbcType=INTEGER},
+      </if>
+      <if test="filmId != null">
+        film_id = #{filmId,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        date = #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="black != null">
+        black = #{black,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.movie.pojo.TimePlan">
+    update time_plan
+    set cinema_id = #{cinemaId,jdbcType=INTEGER},
+      hall_id = #{hallId,jdbcType=INTEGER},
+      film_id = #{filmId,jdbcType=INTEGER},
+      start_time = #{startTime,jdbcType=VARCHAR},
+      price = #{price,jdbcType=VARCHAR},
+      date = #{date,jdbcType=VARCHAR},
+      black = #{black,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

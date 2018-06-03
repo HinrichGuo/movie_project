@@ -1,0 +1,16 @@
+package cn.com.movie.dao;
+
+import java.util.List;
+
+import cn.com.movie.pojo.Goods;
+
+public interface GoodsMapper {
+	
+		boolean updateGoods(Goods goods);
+
+	    boolean deleteGoods(int id);
+
+	    Goods findGoodsById(int id);
+
+	    List<Goods> SelectAll();
+}

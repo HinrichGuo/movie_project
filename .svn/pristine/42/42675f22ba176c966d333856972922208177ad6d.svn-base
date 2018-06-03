@@ -1,0 +1,62 @@
+package cn.com.movie.service;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import cn.com.movie.dao.AreasMapper;
+import cn.com.movie.dao.CitiesMapper;
+import cn.com.movie.dao.ProvincesMapper;
+
+@Service
+
+public class SjldsServiceImp implements SjldsService {
+	@Autowired
+	private ProvincesMapper provincesMapper;
+
+	@Autowired
+	private CitiesMapper citiesMapper;
+
+	@Autowired
+
+	private AreasMapper areasMapper;
+
+	@Override
+	public List<Map<String, Object>> getProvice() {
+
+		return provincesMapper.selectAllProvinces();
+	}
+
+	@Override
+	public List<Map<String, Object>> getCityByProviceId(String pro_id) {
+		// TODO Auto-generated method stub
+		return citiesMapper.selectAllCities(Integer.parseInt(pro_id));
+	}
+
+	@Override
+	public List<Map<String, Object>> getAreaByCityId(String City_id) {
+		// TODO Auto-generated method stub
+		return areasMapper.selectAllAreas(Integer.parseInt(City_id));
+	}
+
+	@Override
+	public String getProviceById(String id) {
+		// TODO Auto-generated method stub
+		return provincesMapper.selectByPrimaryKey(Integer.parseInt(id)).getProvince();
+	}
+
+	@Override
+	public String getCityById(String id) {
+		// TODO Auto-generated method stub
+		return citiesMapper.selectByPrimaryKey(Integer.parseInt(id)).getCity();
+	}
+
+	@Override
+	public String getAreaById(String id) {
+		// TODO Auto-generated method stub
+		return areasMapper.selectByPrimaryKey(Integer.parseInt(id)).getArea();
+	}
+
+}

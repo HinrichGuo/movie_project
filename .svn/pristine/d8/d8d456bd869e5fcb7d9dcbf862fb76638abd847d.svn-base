@@ -1,0 +1,17 @@
+package cn.com.movie.service;
+
+import java.util.List;
+
+import cn.com.movie.pojo.Cinema;
+import cn.com.movie.pojo.CinemaAddress;
+
+public interface CinemaService {
+	
+	int insertCinema(Cinema cinema );
+	int deleteCinema(int id);
+	int updateCinema(Cinema cinema);
+	List<Cinema>  selectAllCinema();
+	Cinema selectOneCinema(int id);
+	int insertCinemaAdress(CinemaAddress cinemaAddress);
+
+}

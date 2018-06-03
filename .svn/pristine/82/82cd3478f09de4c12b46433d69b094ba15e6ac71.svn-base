@@ -1,0 +1,25 @@
+package cn.com.movie.service;
+
+import java.util.List;
+
+import cn.com.movie.pojo.Film;
+
+/**
+ *@title  FilmService.java
+ *<p>
+ * @author 杨晓鹏
+ *@time  2018年3月29日/下午10:32:03
+ */
+public interface FilmService {
+	
+	//增加影片信息
+	int  insertFilm(Film  film);
+	int  deleteFilm(int  id);
+	int  updateFilm(Film  film);
+	List<Film> selectAll();
+	Film  selectOneFilm(int id);
+	
+	
+	
+
+}

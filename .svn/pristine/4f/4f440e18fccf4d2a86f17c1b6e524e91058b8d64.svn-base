@@ -1,0 +1,152 @@
+package cn.com.movie.pojo;
+
+
+/**
+ *@title  File.java
+ *<p>
+ * @author 杨晓鹏
+ *@time  2018年3月29日/下午8:57:23
+ */
+public class File {
+    private Integer id;
+
+    private String filmName;
+
+    private String filmDirector;
+
+    private String filmActor;
+
+    private String filmCountry;
+
+    private String filmIntro;
+
+    private String filmPoster;
+
+    private String filmPremovie;
+
+    private String filmPlaytime;
+
+    private String filmTimelong;
+
+    private Integer playtypeId;
+
+    private String filmType;
+
+    private String black;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getFilmName() {
+        return filmName;
+    }
+
+    public void setFilmName(String filmName) {
+        this.filmName = filmName == null ? null : filmName.trim();
+    }
+
+    public String getFilmDirector() {
+        return filmDirector;
+    }
+
+    public void setFilmDirector(String filmDirector) {
+        this.filmDirector = filmDirector == null ? null : filmDirector.trim();
+    }
+
+    public String getFilmActor() {
+        return filmActor;
+    }
+
+    public void setFilmActor(String filmActor) {
+        this.filmActor = filmActor == null ? null : filmActor.trim();
+    }
+
+    public String getFilmCountry() {
+        return filmCountry;
+    }
+
+    public void setFilmCountry(String filmCountry) {
+        this.filmCountry = filmCountry == null ? null : filmCountry.trim();
+    }
+
+    public String getFilmIntro() {
+        return filmIntro;
+    }
+
+    public void setFilmIntro(String filmIntro) {
+        this.filmIntro = filmIntro == null ? null : filmIntro.trim();
+    }
+
+    public String getFilmPoster() {
+        return filmPoster;
+    }
+
+    public void setFilmPoster(String filmPoster) {
+        this.filmPoster = filmPoster == null ? null : filmPoster.trim();
+    }
+
+    public String getFilmPremovie() {
+        return filmPremovie;
+    }
+
+    public void setFilmPremovie(String filmPremovie) {
+        this.filmPremovie = filmPremovie == null ? null : filmPremovie.trim();
+    }
+
+    public String getFilmPlaytime() {
+        return filmPlaytime;
+    }
+
+    public void setFilmPlaytime(String filmPlaytime) {
+        this.filmPlaytime = filmPlaytime == null ? null : filmPlaytime.trim();
+    }
+
+    public String getFilmTimelong() {
+        return filmTimelong;
+    }
+
+    public void setFilmTimelong(String filmTimelong) {
+        this.filmTimelong = filmTimelong == null ? null : filmTimelong.trim();
+    }
+
+    public Integer getPlaytypeId() {
+        return playtypeId;
+    }
+
+    public void setPlaytypeId(Integer playtypeId) {
+        this.playtypeId = playtypeId;
+    }
+
+    public String getFilmType() {
+        return filmType;
+    }
+
+    public void setFilmType(String filmType) {
+        this.filmType = filmType == null ? null : filmType.trim();
+    }
+
+    public String getBlack() {
+        return black;
+    }
+
+    public File() {
+		super();
+	}
+
+	@Override
+	public String toString() {
+		return "File [id=" + id + ", filmName=" + filmName + ", filmDirector=" + filmDirector + ", filmActor="
+				+ filmActor + ", filmCountry=" + filmCountry + ", filmIntro=" + filmIntro + ", filmPoster=" + filmPoster
+				+ ", filmPremovie=" + filmPremovie + ", filmPlaytime=" + filmPlaytime + ", filmTimelong=" + filmTimelong
+				+ ", playtypeId=" + playtypeId + ", filmType=" + filmType + ", black=" + black + "]";
+	}
+
+	public void setBlack(String black) {
+        this.black = black == null ? null : black.trim();
+    }
+}

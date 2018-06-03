@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.movie.dao.FilmOrderMapper">
+  <resultMap id="BaseResultMap" type="cn.com.movie.pojo.FilmOrder">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="filmorder_code" jdbcType="VARCHAR" property="filmorderCode" />
+    <result column="cinema_id" jdbcType="INTEGER" property="cinemaId" />
+    <result column="film_id" jdbcType="INTEGER" property="filmId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="filmorder_time" jdbcType="VARCHAR" property="filmorderTime" />
+    <result column="ticket_account" jdbcType="VARCHAR" property="ticketAccount" />
+    <result column="black" jdbcType="VARCHAR" property="black" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, filmorder_code, cinema_id, film_id, user_id, filmorder_time, ticket_account, 
+    black
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from film_order
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <!-- lry -->
+  <select id="selectCinemaTicketAccount" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" /><!-- ,SUM(ticket_account) -->
+    from film_order<!--  GROUP BY film_id -->
+    <!-- where id = #{id,jdbcType=INTEGER} -->
+    <!-- SELECT film_id,SUM(ticket_account) FROM film_order GROUP BY film_id -->
+  </select>
+  <!-- lry -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from film_order
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.com.movie.pojo.FilmOrder">
+    insert into film_order (id, filmorder_code, cinema_id, 
+      film_id, user_id, filmorder_time, 
+      ticket_account, black)
+    values (#{id,jdbcType=INTEGER}, #{filmorderCode,jdbcType=VARCHAR}, #{cinemaId,jdbcType=INTEGER}, 
+      #{filmId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{filmorderTime,jdbcType=VARCHAR}, 
+      #{ticketAccount,jdbcType=VARCHAR}, #{black,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.movie.pojo.FilmOrder">
+    insert into film_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="filmorderCode != null">
+        filmorder_code,
+      </if>
+      <if test="cinemaId != null">
+        cinema_id,
+      </if>
+      <if test="filmId != null">
+        film_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="filmorderTime != null">
+        filmorder_time,
+      </if>
+      <if test="ticketAccount != null">
+        ticket_account,
+      </if>
+      <if test="black != null">
+        black,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="filmorderCode != null">
+        #{filmorderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cinemaId != null">
+        #{cinemaId,jdbcType=INTEGER},
+      </if>
+      <if test="filmId != null">
+        #{filmId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="filmorderTime != null">
+        #{filmorderTime,jdbcType=VARCHAR},
+      </if>
+      <if test="ticketAccount != null">
+        #{ticketAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="black != null">
+        #{black,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.movie.pojo.FilmOrder">
+    update film_order
+    <set>
+      <if test="filmorderCode != null">
+        filmorder_code = #{filmorderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cinemaId != null">
+        cinema_id = #{cinemaId,jdbcType=INTEGER},
+      </if>
+      <if test="filmId != null">
+        film_id = #{filmId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="filmorderTime != null">
+        filmorder_time = #{filmorderTime,jdbcType=VARCHAR},
+      </if>
+      <if test="ticketAccount != null">
+        ticket_account = #{ticketAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="black != null">
+        black = #{black,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.movie.pojo.FilmOrder">
+    update film_order
+    set filmorder_code = #{filmorderCode,jdbcType=VARCHAR},
+      cinema_id = #{cinemaId,jdbcType=INTEGER},
+      film_id = #{filmId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      filmorder_time = #{filmorderTime,jdbcType=VARCHAR},
+      ticket_account = #{ticketAccount,jdbcType=VARCHAR},
+      black = #{black,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

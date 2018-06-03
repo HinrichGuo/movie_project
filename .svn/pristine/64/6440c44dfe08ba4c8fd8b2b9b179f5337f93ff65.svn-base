@@ -1,0 +1,26 @@
+package cn.com.movie.handler;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import cn.com.movie.pojo.Film;
+
+
+
+@Controller
+public class Text {
+	
+	
+	@RequestMapping("/text")
+	public String getView() {
+		return "textJsp";
+	}
+	
+	@RequestMapping(value="/add",method=RequestMethod.POST)
+	public String getPer(Film f) {
+		System.out.println("≤‚ ‘ £∫" + f);
+		return "";
+	}
+
+}

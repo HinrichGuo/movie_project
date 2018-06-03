@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.movie.po.AdminMapper">
+  <resultMap id="BaseResultMap" type="cn.com.movie.dao.Admin">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="admin_name" jdbcType="VARCHAR" property="adminName" />
+    <result column="admin_email" jdbcType="VARCHAR" property="adminEmail" />
+    <result column="admin_img" jdbcType="VARCHAR" property="adminImg" />
+    <result column="admin_psw" jdbcType="VARCHAR" property="adminPsw" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, admin_name, admin_email, admin_img, admin_psw
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from admin_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from admin_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.com.movie.dao.Admin">
+    insert into admin_info (id, admin_name, admin_email, 
+      admin_img, admin_psw)
+    values (#{id,jdbcType=INTEGER}, #{adminName,jdbcType=VARCHAR}, #{adminEmail,jdbcType=VARCHAR}, 
+      #{adminImg,jdbcType=VARCHAR}, #{adminPsw,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.movie.dao.Admin">
+    insert into admin_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="adminName != null">
+        admin_name,
+      </if>
+      <if test="adminEmail != null">
+        admin_email,
+      </if>
+      <if test="adminImg != null">
+        admin_img,
+      </if>
+      <if test="adminPsw != null">
+        admin_psw,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="adminName != null">
+        #{adminName,jdbcType=VARCHAR},
+      </if>
+      <if test="adminEmail != null">
+        #{adminEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="adminImg != null">
+        #{adminImg,jdbcType=VARCHAR},
+      </if>
+      <if test="adminPsw != null">
+        #{adminPsw,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.movie.dao.Admin">
+    update admin_info
+    <set>
+      <if test="adminName != null">
+        admin_name = #{adminName,jdbcType=VARCHAR},
+      </if>
+      <if test="adminEmail != null">
+        admin_email = #{adminEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="adminImg != null">
+        admin_img = #{adminImg,jdbcType=VARCHAR},
+      </if>
+      <if test="adminPsw != null">
+        admin_psw = #{adminPsw,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.movie.dao.Admin">
+    update admin_info
+    set admin_name = #{adminName,jdbcType=VARCHAR},
+      admin_email = #{adminEmail,jdbcType=VARCHAR},
+      admin_img = #{adminImg,jdbcType=VARCHAR},
+      admin_psw = #{adminPsw,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+	<select id="selectByNameAndPsw" parameterType="cn.com.movie.dao.Admin" resultMap="BaseResultMap">
+	select 
+    <include refid="Base_Column_List" />
+    from admin_info
+    where admin_name = #{adminName,jdbcType=VARCHAR},
+          admin_psw = #{adminPsw,jdbcType=VARCHAR}
+	</select>
+	
+
+</mapper>

@@ -1,0 +1,52 @@
+package cn.com.movie.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import cn.com.movie.dao.CinemaAddressMapper;
+import cn.com.movie.dao.CinemaMapper;
+import cn.com.movie.pojo.Cinema;
+import cn.com.movie.pojo.CinemaAddress;
+@Service
+public class CinemaServiceImp implements CinemaService {
+	@Autowired
+	private  CinemaMapper cinemaMapper;
+	@Autowired
+	private CinemaAddressMapper  CinemaAddressMapper;
+
+	public int insertCinema(Cinema cinema) {
+		System.out.println("cimne + " + cinema);
+		// TODO Auto-generated method stub
+		return cinemaMapper.insert(cinema);
+	}
+
+	public int deleteCinema(int id) {
+		// TODO Auto-generated method stub
+		return  cinemaMapper.deleteByPrimaryKey(id);
+	}
+
+	public int updateCinema(Cinema cinema) {
+		// TODO Auto-generated method stub
+		return cinemaMapper.updateByPrimaryKey(cinema);
+	}
+
+	public List<Cinema> selectAllCinema() {
+		
+		return null;
+	}
+
+	public Cinema selectOneCinema(int id) {
+		
+		return cinemaMapper.selectByPrimaryKey(id);
+	}
+
+	@Override
+	public int insertCinemaAdress(CinemaAddress cinemaAddress) {
+		
+		return CinemaAddressMapper.insert(cinemaAddress);
+	}
+
+	
+}

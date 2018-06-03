@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.movie.dao.CinemaMapper">
+  <resultMap id="BaseResultMap" type="cn.com.movie.pojo.Cinema">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="cinema_name" jdbcType="VARCHAR" property="cinemaName" />
+    <result column="cinema_logo" jdbcType="VARCHAR" property="cinemaLogo" />
+    <result column="cinema_intro" jdbcType="VARCHAR" property="cinemaIntro" />
+    <result column="cinemaaddress_id" jdbcType="INTEGER" property="cinemaaddressId" />
+    <result column="cinema_isvip" jdbcType="VARCHAR" property="cinemaIsvip" />
+    <result column="cinema_black1" jdbcType="VARCHAR" property="cinemaBlack1" />
+    <result column="cinema_black2" jdbcType="VARCHAR" property="cinemaBlack2" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, cinema_name, cinema_logo, cinema_intro, cinemaaddress_id, cinema_isvip, cinema_black1, 
+    cinema_black2
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cinema_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+   <select id="selectAll"  resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from cinema_info
+  </select>
+  <!-- 查询数据数  -->
+  <select id="selectTotalPage" resultType="java.lang.Integer"  >
+  select count(*)  from cinema_info  where cinema_black1='1'
+  </select>
+  <!--分页查询  -->
+  <select id="PageSelectAll"  resultMap="BaseResultMap">
+  select  <include refid="Base_Column_List" /> from cinema_info where  cinema_black1='1'
+  <if test="start!=null and size!=null">
+            limit #{start},#{size}
+        </if>
+  </select>
+  <!-- 假删除 -->
+   <update id="updateStater" parameterType="java.lang.Integer">
+  update cinema_info set cinema_black1='0' where id = #{id,jdbcType=INTEGER}
+  </update>
+  <!-- 模糊查询数据数 -->
+  <select id="selectLikeTotalPage" resultType="java.lang.Integer"  >
+  select count(*) from cinema_info where cinema_name like concat(concat('%',#{cinemaName,jdbcType=VARCHAR}),'%') and cinema_black1='1'
+  
+  </select>
+   <!-- 模糊查询 -->
+    <select id="selectLikeCinema" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List" />
+        from cinema_info     
+        where cinema_name like concat(concat('%',#{cinemaName,jdbcType=VARCHAR}),'%') and cinema_black1='1'
+        <if test="start!=null and size!=null">
+            limit #{start},#{size}
+        </if>
+    </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from cinema_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+   <!-- 查询cinema类型 -->
+    <select id="selectCinemaType"  parameterType="java.lang.Integer"  resultType="Cinema">
+        select   <include refid="Base_Column_List" />
+        
+         from cinema_info where id= #{id,jdbcType=INTEGER} and cinema_black1='1';
+    </select>
+    
+  <insert id="insert" parameterType="cn.com.movie.pojo.Cinema" >
+    insert into cinema_info (id, cinema_name, cinema_logo, 
+      cinema_intro, cinemaaddress_id, cinema_isvip, 
+      cinema_black1, cinema_black2)
+    values (#{id,jdbcType=INTEGER}, #{cinemaName,jdbcType=VARCHAR}, #{cinemaLogo,jdbcType=VARCHAR}, 
+      #{cinemaIntro,jdbcType=VARCHAR}, #{cinemaaddressId,jdbcType=INTEGER}, #{cinemaIsvip,jdbcType=VARCHAR}, 
+      '1', #{cinemaBlack2,jdbcType=VARCHAR})
+      <selectKey keyProperty="id" order="AFTER" resultType="int">  
+      SELECT LAST_INSERT_ID() AS id  
+    </selectKey> 
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.movie.pojo.Cinema">
+    insert into cinema_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="cinemaName != null">
+        cinema_name,
+      </if>
+      <if test="cinemaLogo != null">
+        cinema_logo,
+      </if>
+      <if test="cinemaIntro != null">
+        cinema_intro,
+      </if>
+      <if test="cinemaaddressId != null">
+        cinemaaddress_id,
+      </if>
+      <if test="cinemaIsvip != null">
+        cinema_isvip,
+      </if>
+      <if test="cinemaBlack1 != null">
+        cinema_black1,
+      </if>
+      <if test="cinemaBlack2 != null">
+        cinema_black2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="cinemaName != null">
+        #{cinemaName,jdbcType=VARCHAR},
+      </if>
+      <if test="cinemaLogo != null">
+        #{cinemaLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="cinemaIntro != null">
+        #{cinemaIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="cinemaaddressId != null">
+        #{cinemaaddressId,jdbcType=INTEGER},
+      </if>
+      <if test="cinemaIsvip != null">
+        #{cinemaIsvip,jdbcType=VARCHAR},
+      </if>
+      <if test="cinemaBlack1 != null">
+        #{cinemaBlack1,jdbcType=VARCHAR},
+      </if>
+      <if test="cinemaBlack2 != null">
+        #{cinemaBlack2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.movie.pojo.Cinema">
+    update cinema_info
+    <set>
+      <if test="cinemaName != null">
+        cinema_name = #{cinemaName,jdbcType=VARCHAR},
+      </if>
+      <if test="cinemaLogo != null">
+        cinema_logo = #{cinemaLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="cinemaIntro != null">
+        cinema_intro = #{cinemaIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="cinemaaddressId != null">
+        cinemaaddress_id = #{cinemaaddressId,jdbcType=INTEGER},
+      </if>
+      <if test="cinemaIsvip != null">
+        cinema_isvip = #{cinemaIsvip,jdbcType=VARCHAR},
+      </if>
+      <if test="cinemaBlack1 != null">
+        cinema_black1 = #{cinemaBlack1,jdbcType=VARCHAR},
+      </if>
+      <if test="cinemaBlack2 != null">
+        cinema_black2 = #{cinemaBlack2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.movie.pojo.Cinema">
+    update cinema_info
+    set cinema_name = #{cinemaName,jdbcType=VARCHAR},
+      cinema_logo = #{cinemaLogo,jdbcType=VARCHAR},
+      cinema_intro = #{cinemaIntro,jdbcType=VARCHAR},
+      cinemaaddress_id = #{cinemaaddressId,jdbcType=INTEGER},
+      cinema_isvip = #{cinemaIsvip,jdbcType=VARCHAR},
+      cinema_black1 = #{cinemaBlack1,jdbcType=VARCHAR},
+      cinema_black2 = #{cinemaBlack2,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

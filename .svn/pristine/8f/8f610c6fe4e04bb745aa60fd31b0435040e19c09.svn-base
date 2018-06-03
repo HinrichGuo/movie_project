@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.movie.dao.HallMapper">
+	<resultMap id="BaseResultMap" type="cn.com.movie.pojo.Hall">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="hall_name" jdbcType="VARCHAR" property="hallName" />
+		<result column="cinema_id" jdbcType="INTEGER" property="cinemaId" />
+		<result column="hall_row" jdbcType="VARCHAR" property="hallRow" />
+		<result column="hall_column" jdbcType="VARCHAR" property="hallColumn" />
+		<result column="black1" jdbcType="VARCHAR" property="black1" />
+		<result column="black2" jdbcType="VARCHAR" property="black2" />
+		<result column="black3" jdbcType="VARCHAR" property="black3" />
+		<result column="black4" jdbcType="VARCHAR" property="black4" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, hall_name, cinema_id, hall_row, hall_column, black1,
+		black2, black3,
+		black4
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from hall_info
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<select id="selectAll" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from hall_info
+	</select>
+	<select id="selectByName" parameterType="Hall"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from hall_info
+		where hall_name = #{hallName,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		hall_info
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="cn.com.movie.pojo.Hall">
+		insert into hall_info (id,
+		hall_name, cinema_id,
+		hall_row, hall_column, black1,
+		black2, black3,
+		black4
+		)
+		values (#{id,jdbcType=INTEGER}, #{hallName,jdbcType=VARCHAR},
+		#{cinemaId,jdbcType=INTEGER},
+		#{hallRow,jdbcType=VARCHAR},
+		#{hallColumn,jdbcType=VARCHAR}, #{black1,jdbcType=VARCHAR},
+		#{black2,jdbcType=VARCHAR}, #{black3,jdbcType=VARCHAR},
+		#{black4,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="cn.com.movie.pojo.Hall">
+		insert into hall_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="hallName != null">
+				hall_name,
+			</if>
+			<if test="cinemaId != null">
+				cinema_id,
+			</if>
+			<if test="hallRow != null">
+				hall_row,
+			</if>
+			<if test="hallColumn != null">
+				hall_column,
+			</if>
+			<if test="black1 != null">
+				black1,
+			</if>
+			<if test="black2 != null">
+				black2,
+			</if>
+			<if test="black3 != null">
+				black3,
+			</if>
+			<if test="black4 != null">
+				black4,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="hallName != null">
+				#{hallName,jdbcType=VARCHAR},
+			</if>
+			<if test="cinemaId != null">
+				#{cinemaId,jdbcType=INTEGER},
+			</if>
+			<if test="hallRow != null">
+				#{hallRow,jdbcType=VARCHAR},
+			</if>
+			<if test="hallColumn != null">
+				#{hallColumn,jdbcType=VARCHAR},
+			</if>
+			<if test="black1 != null">
+				#{black1,jdbcType=VARCHAR},
+			</if>
+			<if test="black2 != null">
+				#{black2,jdbcType=VARCHAR},
+			</if>
+			<if test="black3 != null">
+				#{black3,jdbcType=VARCHAR},
+			</if>
+			<if test="black4 != null">
+				#{black4,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="cn.com.movie.pojo.Hall">
+		update hall_info
+		<set>
+			<if test="hallName != null">
+				hall_name = #{hallName,jdbcType=VARCHAR},
+			</if>
+			<if test="cinemaId != null">
+				cinema_id = #{cinemaId,jdbcType=INTEGER},
+			</if>
+			<if test="hallRow != null">
+				hall_row = #{hallRow,jdbcType=VARCHAR},
+			</if>
+			<if test="hallColumn != null">
+				hall_column = #{hallColumn,jdbcType=VARCHAR},
+			</if>
+			<if test="black1 != null">
+				black1 = #{black1,jdbcType=VARCHAR},
+			</if>
+			<if test="black2 != null">
+				black2 = #{black2,jdbcType=VARCHAR},
+			</if>
+			<if test="black3 != null">
+				black3 = #{black3,jdbcType=VARCHAR},
+			</if>
+			<if test="black4 != null">
+				black4 = #{black4,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="cn.com.movie.pojo.Hall">
+		update hall_info
+		set hall_name = #{hallName,jdbcType=VARCHAR},
+		cinema_id =
+		#{cinemaId,jdbcType=INTEGER},
+		hall_row = #{hallRow,jdbcType=VARCHAR},
+		hall_column = #{hallColumn,jdbcType=VARCHAR},
+		black1 =
+		#{black1,jdbcType=VARCHAR},
+		black2 = #{black2,jdbcType=VARCHAR},
+		black3
+		= #{black3,jdbcType=VARCHAR},
+		black4 = #{black4,jdbcType=VARCHAR}
+		where
+		id = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

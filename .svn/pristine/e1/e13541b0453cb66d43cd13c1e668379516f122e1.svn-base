@@ -1,0 +1,20 @@
+package cn.com.movie.service;
+
+/**
+ * @title SystemService.java
+ *        <p>
+ *        系统的服务层
+ *        <p>
+ * @author Rubin Zhang
+ * @time 29 Mar 201820:32:05
+ */
+public interface SystemService {
+
+	/**
+	 * 登录
+	 * 
+	 * @return
+	 */
+	int login();
+
+}

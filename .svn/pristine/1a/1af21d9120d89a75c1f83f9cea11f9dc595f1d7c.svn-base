@@ -1,0 +1,27 @@
+package cn.com.movie.handler;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+/**
+ *@title  FilmHandler.java
+ *<p>
+ * @author 杨晓鹏
+ *@time  2018年3月29日/下午9:03:17
+ */
+@Controller
+public class FilmHandler {
+
+	
+	@RequestMapping("/AddMovie")
+	public  String  AddMovie() {
+		
+		//System.out.println("测试  AddMovie");
+		return "AddMovie";
+	
+	}
+	
+	
+	
+	
+}

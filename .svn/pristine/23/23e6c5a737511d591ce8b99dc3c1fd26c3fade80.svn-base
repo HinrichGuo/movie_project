@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+  
+<!DOCTYPE generatorConfiguration    
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"    
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">    
+<generatorConfiguration>    
+<!-- 数据库驱动-->    
+    <classPathEntry  location="F:\testFq\testPo\lib\mysql-connector-java-5.1.8-bin.jar"/>    
+    <context id="DB2Tables"  targetRuntime="MyBatis3">    
+        <commentGenerator>    
+            <property name="suppressDate" value="true"/>    
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->    
+            <property name="suppressAllComments" value="true"/>    
+        </commentGenerator>    
+        <!--数据库链接URL，用户名、密码 -->    
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" 
+        	connectionURL="jdbc:mysql://localhost:3306/fq" 
+        	userId="root" 
+        	password="root">    
+        </jdbcConnection>    
+        <javaTypeResolver>    
+            <property name="forceBigDecimals" value="false"/>    
+        </javaTypeResolver>    
+        <!-- 生成模型的包名和位置-->    
+        <javaModelGenerator targetPackage="cn.com.cxsw.pojo" targetProject="testPo">    
+            <property name="enableSubPackages" value="true"/>    
+            <property name="trimStrings" value="true"/>    
+        </javaModelGenerator>    
+        <!-- 生成映射文件的包名和位置-->    
+     	<!-- <sqlMapGenerator targetPackage="com.cxsw.fm.dao.mapper" targetProject="testPo">    
+            <property name="enableSubPackages" value="true"/>    
+        </sqlMapGenerator>   -->
+        <!-- 生成DAO的包名和位置-->    
+        <!-- <javaClientGenerator type="XMLMAPPER" targetPackage="com.cxsw.fm.dao" targetProject="testPo">    
+            <property name="enableSubPackages" value="true"/>    
+        </javaClientGenerator> -->
+        <!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名-->    
+        <!-- 
+        account，account_group，account_village，authority，
+        commune，county，farmer，GROUP，organization，group_authority，
+        organization_stock，shareholder，
+        stock_trade，stock_type，town，village -->
+    	<table tableName="farmer" domainObjectName="Farmer" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+    	<!-- <table tableName="sys_log" domainObjectName="SysLog" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+    	<table tableName="farmer_codes" domainObjectName="FarmerCodes" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+    	<table tableName="share_bonus" domainObjectName="ShareBonus" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+   	    <table tableName="organization_stock_type_ratio" domainObjectName="OrganizationStockTypeRatio" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+    	<table tableName="account" domainObjectName="Account" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+    	<table tableName="account_group" domainObjectName="AccountGroup" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+    	<table tableName="account_village" domainObjectName="AccountVillage" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+    	<table tableName="authority" domainObjectName="Authority" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+    	<table tableName="commune" domainObjectName="Commune" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+    	<table tableName="county" domainObjectName="County" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+    	<table tableName="group" domainObjectName="Group" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+    	<table tableName="organization" domainObjectName="Organization" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+    	<table tableName="group_authority" domainObjectName="GroupAuthority" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+    	<table tableName="organization_stock" domainObjectName="OrganizationStock" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+    	<table tableName="shareholder" domainObjectName="Shareholder" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+    	<table tableName="stock_trade" domainObjectName="StockTrade" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+    	<table tableName="stock_type" domainObjectName="StockType" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+    	<table tableName="town" domainObjectName="Town" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+    	<table tableName="village" domainObjectName="Village" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table> -->
+    </context>    
+</generatorConfiguration>

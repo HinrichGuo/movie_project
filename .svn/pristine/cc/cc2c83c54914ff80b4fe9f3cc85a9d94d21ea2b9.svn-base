@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.movie.dao.GoodsMapper">
+  <resultMap id="BaseResultMap" type="cn.com.movie.pojo.Goods">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="goods_name" jdbcType="VARCHAR" property="goodsName" />
+    <result column="goods_price" jdbcType="VARCHAR" property="goodsPrice" />
+    <result column="goods_image" jdbcType="VARCHAR" property="goodsImage" />
+    <result column="goods_type" jdbcType="VARCHAR" property="goodsType" />
+    <result column="goods_intro" jdbcType="VARCHAR" property="goodsIntro" />
+    <result column="cinema_id" jdbcType="INTEGER" property="cinemaId" />
+    <result column="goods_ishave" jdbcType="VARCHAR" property="goodsIshave" />
+    <result column="goods_black1" jdbcType="VARCHAR" property="goodsBlack1" />
+    <result column="goods_black" jdbcType="VARCHAR" property="goodsBlack" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, goods_name, goods_price, goods_image, goods_type, goods_intro, cinema_id, goods_ishave, 
+    goods_black1, goods_black
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from goods_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from goods_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.com.movie.pojo.Goods">
+    insert into goods_info (id, goods_name, goods_price, 
+      goods_image, goods_type, goods_intro, 
+      cinema_id, goods_ishave, goods_black1, 
+      goods_black)
+    values (#{id,jdbcType=INTEGER}, #{goodsName,jdbcType=VARCHAR}, #{goodsPrice,jdbcType=VARCHAR}, 
+      #{goodsImage,jdbcType=VARCHAR}, #{goodsType,jdbcType=VARCHAR}, #{goodsIntro,jdbcType=VARCHAR}, 
+      #{cinemaId,jdbcType=INTEGER}, #{goodsIshave,jdbcType=VARCHAR}, #{goodsBlack1,jdbcType=VARCHAR}, 
+      #{goodsBlack,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.movie.pojo.Goods">
+    insert into goods_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="goodsName != null">
+        goods_name,
+      </if>
+      <if test="goodsPrice != null">
+        goods_price,
+      </if>
+      <if test="goodsImage != null">
+        goods_image,
+      </if>
+      <if test="goodsType != null">
+        goods_type,
+      </if>
+      <if test="goodsIntro != null">
+        goods_intro,
+      </if>
+      <if test="cinemaId != null">
+        cinema_id,
+      </if>
+      <if test="goodsIshave != null">
+        goods_ishave,
+      </if>
+      <if test="goodsBlack1 != null">
+        goods_black1,
+      </if>
+      <if test="goodsBlack != null">
+        goods_black,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="goodsName != null">
+        #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsPrice != null">
+        #{goodsPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsImage != null">
+        #{goodsImage,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsType != null">
+        #{goodsType,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsIntro != null">
+        #{goodsIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="cinemaId != null">
+        #{cinemaId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsIshave != null">
+        #{goodsIshave,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsBlack1 != null">
+        #{goodsBlack1,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsBlack != null">
+        #{goodsBlack,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.movie.pojo.Goods">
+    update goods_info
+    <set>
+      <if test="goodsName != null">
+        goods_name = #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsPrice != null">
+        goods_price = #{goodsPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsImage != null">
+        goods_image = #{goodsImage,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsType != null">
+        goods_type = #{goodsType,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsIntro != null">
+        goods_intro = #{goodsIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="cinemaId != null">
+        cinema_id = #{cinemaId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsIshave != null">
+        goods_ishave = #{goodsIshave,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsBlack1 != null">
+        goods_black1 = #{goodsBlack1,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsBlack != null">
+        goods_black = #{goodsBlack,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.movie.pojo.Goods">
+    update goods_info
+    set goods_name = #{goodsName,jdbcType=VARCHAR},
+      goods_price = #{goodsPrice,jdbcType=VARCHAR},
+      goods_image = #{goodsImage,jdbcType=VARCHAR},
+      goods_type = #{goodsType,jdbcType=VARCHAR},
+      goods_intro = #{goodsIntro,jdbcType=VARCHAR},
+      cinema_id = #{cinemaId,jdbcType=INTEGER},
+      goods_ishave = #{goodsIshave,jdbcType=VARCHAR},
+      goods_black1 = #{goodsBlack1,jdbcType=VARCHAR},
+      goods_black = #{goodsBlack,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

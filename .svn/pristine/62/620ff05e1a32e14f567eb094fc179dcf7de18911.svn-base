@@ -1,0 +1,30 @@
+package cn.com.movie.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import cn.com.movie.dao.GoodsMapper;
+import cn.com.movie.pojo.Goods;
+@Service
+public class GoodsServiceImpl implements GoodsService {
+
+	@Autowired
+	private GoodsMapper goodsMapper;
+	@Override
+	public boolean deleteByPrimaryKey(Integer id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public int insert(Goods record) {
+		if(goodsMapper.insert(record)>=0) {
+			return 1;
+		}
+		return 0;
+		
+		
+		
+	}
+
+}

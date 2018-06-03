@@ -1,0 +1,12 @@
+package cn.com.movie.service;
+
+import cn.com.movie.pojo.Goods;
+
+public interface GoodsService {
+
+	 	boolean deleteByPrimaryKey(Integer id);
+
+	 	boolean insert(Goods record);
+
+	 	
+}

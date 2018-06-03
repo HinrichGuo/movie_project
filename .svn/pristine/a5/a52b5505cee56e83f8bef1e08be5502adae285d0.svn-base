@@ -1,0 +1,83 @@
+package cn.com.movie.pojo;
+
+public class FilmCinemaPlay {
+    private Integer id;
+
+    private Integer filmId;
+
+    private Integer cinemaId;
+
+    private Integer hallId;
+
+    private String firstdate;
+
+    private String firsttime;
+
+    private String black1;
+
+    private String black2;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getFilmId() {
+        return filmId;
+    }
+
+    public void setFilmId(Integer filmId) {
+        this.filmId = filmId;
+    }
+
+    public Integer getCinemaId() {
+        return cinemaId;
+    }
+
+    public void setCinemaId(Integer cinemaId) {
+        this.cinemaId = cinemaId;
+    }
+
+    public Integer getHallId() {
+        return hallId;
+    }
+
+    public void setHallId(Integer hallId) {
+        this.hallId = hallId;
+    }
+
+    public String getFirstdate() {
+        return firstdate;
+    }
+
+    public void setFirstdate(String firstdate) {
+        this.firstdate = firstdate == null ? null : firstdate.trim();
+    }
+
+    public String getFirsttime() {
+        return firsttime;
+    }
+
+    public void setFirsttime(String firsttime) {
+        this.firsttime = firsttime == null ? null : firsttime.trim();
+    }
+
+    public String getBlack1() {
+        return black1;
+    }
+
+    public void setBlack1(String black1) {
+        this.black1 = black1 == null ? null : black1.trim();
+    }
+
+    public String getBlack2() {
+        return black2;
+    }
+
+    public void setBlack2(String black2) {
+        this.black2 = black2 == null ? null : black2.trim();
+    }
+}

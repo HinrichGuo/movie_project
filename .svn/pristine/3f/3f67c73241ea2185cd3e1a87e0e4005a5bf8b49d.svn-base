@@ -1,0 +1,51 @@
+package cn.com.movie.handler;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import cn.com.movie.pojo.Cinema;
+import cn.com.movie.service.CinemaService;
+
+/**
+* @title CinemaHandler.java
+ *<p>
+ *<p>
+ * @author 郭欣
+ * @time 2018年3月29日下午8:46:57
+ */
+@Controller
+/*@RequestMapping(value="Cinema")*/
+public class CinemaHandler {
+	
+	@Autowired
+	private CinemaService cinemaService;
+	/**
+	 * 跳转至添加页面
+	 * @return
+	 */
+	@RequestMapping("/jumpAddCinema")
+	public String jump() {
+		
+		return "AddCinema";
+	}
+	
+	/**
+	 * 添加操作
+	 * @param cinema
+	 * @return
+	 * 
+	 */
+	@RequestMapping("/addCinema")
+	public String addCinema(Cinema cinema) {
+		if(cinema!=null) {
+			cinemaService.insertCinema(cinema);
+			
+		}
+		
+		return "QueryCinema";
+		
+	}
+	
+	
+        
+}

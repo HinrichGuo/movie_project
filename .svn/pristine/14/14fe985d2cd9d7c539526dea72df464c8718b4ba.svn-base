@@ -1,0 +1,50 @@
+package cn.com.movie.handler;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import cn.com.movie.pojo.Film;
+import cn.com.movie.service.FilmService;
+
+/**
+ *@title  FilmHandler.java
+ *<p>
+ * @author 杨晓鹏
+ *@time  2018年3月29日/下午9:03:17
+ */
+
+@Controller
+public class FilmHandler {
+	@Autowired
+	private  FilmService   filmService;
+	
+	
+	
+	//跳转到添加影片页面
+	
+	@RequestMapping("/jumpAddFilm")
+	public  String  jumpAddFilm() {
+		System.out.println("测试  jumpAddFilm");
+		return "AddMovie";
+	
+	}
+	@RequestMapping("/addFilm")
+	public  String   addFilm(Film  film) {
+		System.out.println("测试addFilm"
+				+film.toString());
+		if(film!=null) {
+		
+			filmService.insertFilm(film);
+		}
+		
+		return "QueryCinema";
+		
+		
+		
+	}
+	
+	
+	
+	
+}

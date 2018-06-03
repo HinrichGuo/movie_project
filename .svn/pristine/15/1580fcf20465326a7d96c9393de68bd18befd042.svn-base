@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.movie.dao.GoodsOrderMapper">
+  <resultMap id="BaseResultMap" type="cn.com.movie.pojo.GoodsOrder">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="gorder_code" jdbcType="VARCHAR" property="gorderCode" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="goods_id" jdbcType="INTEGER" property="goodsId" />
+    <result column="buy_account" jdbcType="VARCHAR" property="buyAccount" />
+    <result column="black1" jdbcType="VARCHAR" property="black1" />
+    <result column="black2" jdbcType="VARCHAR" property="black2" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, gorder_code, user_id, goods_id, buy_account, black1, black2
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from goods_order
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from goods_order
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.com.movie.pojo.GoodsOrder">
+    insert into goods_order (id, gorder_code, user_id, 
+      goods_id, buy_account, black1, 
+      black2)
+    values (#{id,jdbcType=INTEGER}, #{gorderCode,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, 
+      #{goodsId,jdbcType=INTEGER}, #{buyAccount,jdbcType=VARCHAR}, #{black1,jdbcType=VARCHAR}, 
+      #{black2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.movie.pojo.GoodsOrder">
+    insert into goods_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="gorderCode != null">
+        gorder_code,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="goodsId != null">
+        goods_id,
+      </if>
+      <if test="buyAccount != null">
+        buy_account,
+      </if>
+      <if test="black1 != null">
+        black1,
+      </if>
+      <if test="black2 != null">
+        black2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="gorderCode != null">
+        #{gorderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsId != null">
+        #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="buyAccount != null">
+        #{buyAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="black1 != null">
+        #{black1,jdbcType=VARCHAR},
+      </if>
+      <if test="black2 != null">
+        #{black2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.movie.pojo.GoodsOrder">
+    update goods_order
+    <set>
+      <if test="gorderCode != null">
+        gorder_code = #{gorderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsId != null">
+        goods_id = #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="buyAccount != null">
+        buy_account = #{buyAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="black1 != null">
+        black1 = #{black1,jdbcType=VARCHAR},
+      </if>
+      <if test="black2 != null">
+        black2 = #{black2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.movie.pojo.GoodsOrder">
+    update goods_order
+    set gorder_code = #{gorderCode,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER},
+      goods_id = #{goodsId,jdbcType=INTEGER},
+      buy_account = #{buyAccount,jdbcType=VARCHAR},
+      black1 = #{black1,jdbcType=VARCHAR},
+      black2 = #{black2,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

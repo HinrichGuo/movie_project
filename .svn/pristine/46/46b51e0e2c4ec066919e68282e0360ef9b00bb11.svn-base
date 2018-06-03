@@ -1,0 +1,56 @@
+package cn.com.movie.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import cn.com.movie.dao.FilmMapper;
+import cn.com.movie.pojo.Film;
+
+/**
+ *@title  FilmServiceImpl.java
+ *<p>     影片实现类
+ * @author 杨晓鹏
+ *@time  2018年3月30日/下午9:54:37
+ */
+@Service
+public class FilmServiceImpl implements FilmService {
+     
+	@Autowired
+	private  FilmMapper  filmMapper;
+	@Override
+	public int insertFilm(Film film) {
+		// TODO Auto-generated method stub
+		System.out.println("测试添加影片操作"+film);
+		return  filmMapper.insert(film);
+	}
+
+	@Override
+	public int deleteFilm(int id) {
+		// TODO Auto-generated method stub
+		
+		return  filmMapper.deleteByPrimaryKey(id);
+	
+	}
+
+	@Override
+	public int updateFilm(Film  film) {
+		// TODO Auto-generated method stub
+		
+		return filmMapper.updateByPrimaryKey(film);
+	}
+
+	@Override
+	public List<Film> selectAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Film selectOneFilm(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

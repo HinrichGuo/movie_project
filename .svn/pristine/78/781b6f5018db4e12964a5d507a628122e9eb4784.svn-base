@@ -1,0 +1,31 @@
+package cn.com.movie.handler;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import cn.com.movie.pojo.Goods;
+
+/**
+ * @title GoodsHandler.java
+ * <p>
+ * <P>
+ * @author 张长伟
+ * @time  2018年3月29日 下午8:47:17
+ */
+@Controller
+public class GoodsHandler {
+
+	@RequestMapping("/AddGoods")
+	public String getAddGoods() {
+		
+		return "AddGoods";
+	}
+	@RequestMapping(value="/add",method=RequestMethod.POST)
+	public String getPer(Goods ag){
+		System.out.println("******" + ag);
+		return null;
+		
+	}
+	
+}

@@ -1,0 +1,17 @@
+package cn.com.movie.dao;
+
+/**
+ * @title  AdminMapper.java
+ * <p>
+ * <p>
+ * @author 盛韬
+ * @time 下午9:58:28 /2018年3月30日
+ */
+public interface AdminMapper {
+	
+	boolean selectByNameAndPsw(Admin record);
+	
+	
+	
+
+}

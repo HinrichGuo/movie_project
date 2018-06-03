@@ -1,0 +1,29 @@
+package cn.com.movie.handler;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import cn.com.movie.pojo.Cinema;
+
+
+/**
+* @title CinemaHandler.java
+ *<p>
+ *<p>
+ * @author 郭欣
+ * @time 2018年3月29日下午8:46:57
+ */
+@Controller
+public class CinemaHandler {
+	@RequestMapping(value="/addCinema",method=RequestMethod.GET) 
+        public String AddCinema(Cinema c) {
+		System.out.println("测试"+c.toString());
+        	return "QueryCinema";
+        }
+	@RequestMapping("/add")
+	public String login() {
+		return "AddCinema";
+	}
+        
+}

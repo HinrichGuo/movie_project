@@ -1,0 +1,44 @@
+package cn.com.movie.handler;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.stereotype.Controller;
+
+import cn.com.movie.service.SjldsService;
+
+
+/**
+ * SjldsServiceImpl.java
+ * @describe
+ * <p> 三级联动的核心业务
+ * @author   Rubin Zhang
+ * @creation 2017年4月10日下午10:18:34
+ */
+@Controller
+public class SjldsHandler implements SjldsService {
+	
+	private List<Map<String, Object>> data;
+
+	@Override
+	public List<Map<String, Object>> getProvice()  {
+		
+		/*data = db.query(sql);*/
+		return data;
+	}
+
+	@Override
+	public List<Map<String, Object>> getCityByProviceId(String pro_id) {
+		
+		/*data = db.query(sql, pro_id);*/
+		return data;
+	}
+
+	@Override
+	public List<Map<String, Object>> getAreaByCityId(String City_id) {
+	
+		/*data = db.query(sql, City_id);*/
+		return data;
+	}
+
+}

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.movie.dao.CinemaAddressMapper">
+  <resultMap id="BaseResultMap" type="cn.com.movie.pojo.CinemaAddress">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="cinema_id" jdbcType="INTEGER" property="cinemaId" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="cinema_phone" jdbcType="VARCHAR" property="cinemaPhone" />
+    <result column="black1" jdbcType="VARCHAR" property="black1" />
+    <result column="black2" jdbcType="VARCHAR" property="black2" />
+    <result column="black3" jdbcType="VARCHAR" property="black3" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, cinema_id, address, cinema_phone, black1, black2, black3
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cinema_address
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from cinema_address
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.com.movie.pojo.CinemaAddress">
+    insert into cinema_address (id, cinema_id, address, 
+      cinema_phone, black1, black2, 
+      black3)
+    values (#{id,jdbcType=INTEGER}, #{cinemaId,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, 
+      #{cinemaPhone,jdbcType=VARCHAR}, #{black1,jdbcType=VARCHAR}, #{black2,jdbcType=VARCHAR}, 
+      #{black3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.movie.pojo.CinemaAddress">
+    insert into cinema_address
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="cinemaId != null">
+        cinema_id,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="cinemaPhone != null">
+        cinema_phone,
+      </if>
+      <if test="black1 != null">
+        black1,
+      </if>
+      <if test="black2 != null">
+        black2,
+      </if>
+      <if test="black3 != null">
+        black3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="cinemaId != null">
+        #{cinemaId,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="cinemaPhone != null">
+        #{cinemaPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="black1 != null">
+        #{black1,jdbcType=VARCHAR},
+      </if>
+      <if test="black2 != null">
+        #{black2,jdbcType=VARCHAR},
+      </if>
+      <if test="black3 != null">
+        #{black3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.movie.pojo.CinemaAddress">
+    update cinema_address
+    <set>
+      <if test="cinemaId != null">
+        cinema_id = #{cinemaId,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="cinemaPhone != null">
+        cinema_phone = #{cinemaPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="black1 != null">
+        black1 = #{black1,jdbcType=VARCHAR},
+      </if>
+      <if test="black2 != null">
+        black2 = #{black2,jdbcType=VARCHAR},
+      </if>
+      <if test="black3 != null">
+        black3 = #{black3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.movie.pojo.CinemaAddress">
+    update cinema_address
+    set cinema_id = #{cinemaId,jdbcType=INTEGER},
+      address = #{address,jdbcType=VARCHAR},
+      cinema_phone = #{cinemaPhone,jdbcType=VARCHAR},
+      black1 = #{black1,jdbcType=VARCHAR},
+      black2 = #{black2,jdbcType=VARCHAR},
+      black3 = #{black3,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,5 @@
+.Wdate{
+	background:#fff url(datePicker.gif) no-repeat right;
+}
+.Wdate::-ms-clear{display:none;}
+
